@@ -1,0 +1,17 @@
+```javascript
+const Joi = require('joi');
+
+// Schema for dataset validation
+const datasetSchema = Joi.object({
+    name: Joi.string().required(),
+    description: Joi.string().required(),
+    data: Joi.array().items(Joi.object()).required()
+});
+
+// Validate dataset function
+const validateDataset = (dataset) => {
+    return datasetSchema.validate(dataset);
+};
+
+module.exports = validateDataset;
+```

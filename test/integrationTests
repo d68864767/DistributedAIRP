@@ -1,0 +1,25 @@
+// Since the `test/integrationTests/` directory is expected to contain multiple test files, 
+// I'll provide a template for a generic integration test file. 
+// Let's assume we're testing the datasetController's functionality.
+
+const request = require('supertest');
+const app = require('../../src/config/server');
+const mongoose = require('../../src/config/database');
+
+describe('Dataset Controller Integration Tests', () => {
+    beforeAll(async () => {
+        await mongoose.connect();
+    });
+
+    afterAll(async () => {
+        await mongoose.disconnect();
+    });
+
+    test('GET /api/dataset - success', async () => {
+        const res = await request(app).get('/api/dataset');
+        expect(res.statusCode).toEqual(200);
+        expect(res.body).toHaveProperty('datasets');
+    });
+
+    // Add more tests as needed for other API endpoints and scenarios
+});

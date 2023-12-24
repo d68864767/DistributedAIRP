@@ -1,0 +1,50 @@
+// src/api/middleware/auth.js
+
+const jwt = require('jsonwebtoken');
+const logger = require('../../utils/logger');
+
+// Middleware for checking JWT token
+const checkToken = (req, res, next) => {
+    const token = req.headers['authorization'];
+
+    if (!token) {
+        logger.error('No token provided');
+        return res.status(403).send({ auth: false, message: 'No token provided.' });
+    }
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            logger.error('Failed to authenticate token');
+            return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+        }
+        
+        // If everything is good, save to request for use in other routes
+        req.userId = decoded.id;
+        next();
+    });
+};
+
+module.exports = checkToken;
+
+
+// src/api/middleware/validateRequest.js
+
+const Joi = require('joi');
+const logger = require('../../utils/logger');
+
+// Middleware for validating request with Joi schema
+const validateRequest = (schema) => {
+    return (req, res, next) => {
+        const result = Joi.validate(req.body, schema);
+
+        if (result.error) {
+            logger.error('Validation error: ' + result.error.details[0].message);
+            return res.status(400).json({ status: 'error', message: 'Invalid request data' });
+        }
+
+        // If the request data is valid, continue to the next middleware
+        next();
+    };
+};
+
+module.exports = validateRequest;

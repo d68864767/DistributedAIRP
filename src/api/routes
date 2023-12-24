@@ -1,0 +1,23 @@
+```javascript
+const express = require('express');
+const router = express.Router();
+
+const datasetController = require('../controllers/datasetController');
+const projectController = require('../controllers/projectController');
+
+// Dataset routes
+router.get('/datasets', datasetController.getAllDatasets);
+router.get('/datasets/:id', datasetController.getDatasetById);
+router.post('/datasets', datasetController.createDataset);
+router.put('/datasets/:id', datasetController.updateDataset);
+router.delete('/datasets/:id', datasetController.deleteDataset);
+
+// Project routes
+router.get('/projects', projectController.getAllProjects);
+router.get('/projects/:id', projectController.getProjectById);
+router.post('/projects', projectController.createProject);
+router.put('/projects/:id', projectController.updateProject);
+router.delete('/projects/:id', projectController.deleteProject);
+
+module.exports = router;
+```

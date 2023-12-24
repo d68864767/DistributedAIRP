@@ -1,0 +1,52 @@
+```javascript
+// public/js/main.js
+
+// Define the base API URL
+const API_URL = 'http://localhost:3000/api'; // Replace with your actual API URL
+
+// Function to fetch all datasets
+async function getAllDatasets() {
+    try {
+        const response = await fetch(`${API_URL}/datasets`);
+        const datasets = await response.json();
+        return datasets;
+    } catch (error) {
+        console.error(`Error fetching datasets: ${error}`);
+    }
+}
+
+// Function to fetch a specific dataset by ID
+async function getDatasetById(id) {
+    try {
+        const response = await fetch(`${API_URL}/datasets/${id}`);
+        const dataset = await response.json();
+        return dataset;
+    } catch (error) {
+        console.error(`Error fetching dataset: ${error}`);
+    }
+}
+
+// Function to fetch all projects
+async function getAllProjects() {
+    try {
+        const response = await fetch(`${API_URL}/projects`);
+        const projects = await response.json();
+        return projects;
+    } catch (error) {
+        console.error(`Error fetching projects: ${error}`);
+    }
+}
+
+// Function to fetch a specific project by ID
+async function getProjectById(id) {
+    try {
+        const response = await fetch(`${API_URL}/projects/${id}`);
+        const project = await response.json();
+        return project;
+    } catch (error) {
+        console.error(`Error fetching project: ${error}`);
+    }
+}
+
+// You can add more functions here to interact with other API endpoints as needed
+```

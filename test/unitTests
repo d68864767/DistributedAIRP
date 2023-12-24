@@ -1,0 +1,17 @@
+```javascript
+// test/unitTests/sampleTest.js
+
+const chai = require('chai');
+const expect = chai.expect;
+
+describe('Sample Test', function() {
+  it('should pass this sample test', function() {
+    const a = 1;
+    const b = 2;
+    const c = a + b;
+
+    expect(c).to.equal(3);
+  });
+});
+```
+
